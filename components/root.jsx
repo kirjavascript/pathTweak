@@ -73,6 +73,8 @@ class Root extends React.Component {
             fill stroke stroke-width
             /#M0,0 (parser)
             h/v path info ??
+            https://github.com/mobxjs/mobx-reactive2015-demo/tree/master/src/stores
+            time travel (if certain actions, only update last undo slot (!))
         */}
 
         </div>;
