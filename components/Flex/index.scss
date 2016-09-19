@@ -1,0 +1,15 @@
+.flex {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-items: top;
+    justify-content: left;
+    align-content: stretch;
+
+    .tile {
+        padding: 5px;
+        //flex-grow: 1;
+        // min-width: 0;
+    }
+
+}

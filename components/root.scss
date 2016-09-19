@@ -1,0 +1,60 @@
+@font-face{font-family:'Source Sans Pro';font-style:normal;font-weight:400;src:local('Source Sans Pro'),local(SourceSansPro-Regular),url(https://fonts.gstatic.com/s/sourcesanspro/v9/ODelI1aHBYDBqgeIAH2zlNV_2ngZ8dMf8fLgjYEouxg.woff2) format("woff2");unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02C6,U+02DA,U+02DC,U+2000-206F,U+2074,U+20AC,U+2212,U+2215,U+E0FF,U+EFFD,U+F000}
+
+html, body {
+    height: 100%;
+    font-family: 'Source Sans Pro', sans-serif;
+    margin: 0px;
+    padding: 0px;
+}
+
+a {
+    text-decoration: none;
+    font-weight: bold;
+    color: #3399ff;
+    letter-spacing: -1px;
+
+    &:active,
+    &:visited,
+    &:hover,
+    &:link {
+        text-decoration: none;
+    }
+}
+
+button, select, input {
+    color: #F8F8F8;
+    outline: none;
+    border: none;
+    padding: 5px 10px;
+    border-radius: 2px;
+    box-shadow: rgb(0, 0, 0) 0px 2px 10px -6px;
+    // cursor: pointer;
+    display: inline-block;
+    background-color: rgb(76, 142, 250);
+    margin: 5px;
+    -moz-appearance:none;
+}
+
+input {
+    max-width: 40px;
+    text-align: center;
+}
+
+h1 {
+    margin: 10px 0px;
+}
+
+h2 {
+    margin: 0px 0px 10px 0px;
+    display: inline-block;
+    margin-right: 10px;
+}
+
+::selection {
+    background-color: #000;
+    color: #FFF;
+}
+::-moz-selection {
+    background-color: #000;
+    color: #FFF;
+}
