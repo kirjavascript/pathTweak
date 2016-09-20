@@ -53,7 +53,7 @@ class Root extends React.Component {
                     })}
 
                     <button onClick={::store.closePath}>
-                        {store.state.closed ? 'Unclose' : 'Close'}
+                        {store.closed ? 'Unclose' : 'Close'}
                     </button>
                     <button onClick={::store.clear}>
                         Clear
@@ -75,6 +75,8 @@ class Root extends React.Component {
             h/v path info ??
             https://github.com/mobxjs/mobx-reactive2015-demo/tree/master/src/stores
             time travel (if certain actions, only update last undo slot (!))
+
+            make command a new class (!) have computed x/y snapTo
         */}
 
         </div>;

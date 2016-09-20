@@ -7,7 +7,6 @@ const Command = (props) => {
 
     return <svg xmlns="http://www.w3.org/2000/svg" width={store.width} height={store.height}>
         <rect x="0" y="0"  width={store.width} height={store.height} fill="none" stroke="black"/>
-        <path d={store.path} fill={store.fill} fillOpacity="0.2" stroke={store.stroke} strokeWidth={store.strokeWidth}/>
         <g>
             {store.commands.map((command) => {
 
@@ -16,6 +15,14 @@ const Command = (props) => {
                     command={command}/>;
             })}
         </g>    
+
+        <path
+            d={store.path}
+            fill={store.fill}
+            fillOpacity="0.2"
+            stroke={store.stroke}
+            strokeWidth={store.strokeWidth}
+            style={{pointerEvents:'none'}}/>
     </svg>;
 
 };
@@ -35,8 +42,10 @@ class Node extends React.Component {
             e.preventDefault();
             command.x += dragEvent.deltaX;
             command.y += dragEvent.deltaY;
-            if (command.type == 'C') {
+            if (command.type == 'C' || command.type == 'Q' || command.type == 'A') {
                 this.onDragC1(e, dragEvent);
+            }
+            if (command.type == 'C') {
                 this.onDragC2(e, dragEvent);
             }
 
@@ -65,28 +74,29 @@ class Node extends React.Component {
                 onDrag={this.onDrag}
                 disabled={false}>
                 <circle 
+                    onMouseEnter={command.select}
                     cx={command.x}
                     cy={command.y}
                     r={10}
                     fill="#f33"
-                    fillOpacity="0.5"/>
+                    fillOpacity={command.selected ? '0.5' : '0'}/>
             </DraggableCore>
-            {(command.type == 'C' || command.type == 'Q' || command.type == 'A') &&
-                <Adjust 
-                    drag={this.onDragC1}
-                    x={command.x}
-                    y={command.y}
-                    cx={command.c1x}
-                    cy={command.c1y} />
-            }
-            {(command.type == 'C') &&
-                <Adjust 
-                    drag={this.onDragC2}
-                    x={command.x}
-                    y={command.y}
-                    cx={command.c2x}
-                    cy={command.c2y} />
-            }
+                {(command.type == 'C' || command.type == 'Q' || command.type == 'A') &&
+                    <Adjust 
+                        drag={this.onDragC1}
+                        x={command.x}
+                        y={command.y}
+                        cx={command.c1x}
+                        cy={command.c1y} />
+                }
+                {(command.type == 'C') &&
+                    <Adjust 
+                        drag={this.onDragC2}
+                        x={command.x}
+                        y={command.y}
+                        cx={command.c2x}
+                        cy={command.c2y} />
+                }
         </g>;
     }
 }
@@ -102,7 +112,7 @@ const Adjust = (props) => {
                 cy={props.cy}
                 r={5}
                 fill="#39f"
-                fillOpacity="0.5"/>
+                fillOpacity="1"/>
         </DraggableCore>
         <line 
             x1={props.x}
@@ -110,7 +120,7 @@ const Adjust = (props) => {
             y1={props.y}
             y2={props.cy}
             stroke="grey"
-            strokeWidth="0.5"/>
+            strokeWidth="1"/>
     </g>;
 };
 

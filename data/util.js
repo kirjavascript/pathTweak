@@ -15,7 +15,7 @@ function getPath() {
 
     });
 
-    if (this.state.closed) {
+    if (this.closed) {
         output.push('z');
     }
 

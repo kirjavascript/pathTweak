@@ -56,7 +56,7 @@ class Command extends React.Component {
     render() {
         let data = this.props.data;
 
-        return <div>
+        return <div onMouseEnter={data.select}>
         <h2>{data.type}</h2>
         
         X <input type="text" value={data.x} onChange={this.setX}/>
