@@ -1,4 +1,4 @@
-import { action, computed, observable } from 'mobx';
+import { action, computed, observable, autorun } from 'mobx';
 import { getPath } from './util';
 import Command from './command';
 
@@ -67,5 +67,9 @@ class Store {
 
 
 let store = window.store = new Store;
+
+autorun(() => {
+    console.log(store.grid);
+});
 
 export default store;

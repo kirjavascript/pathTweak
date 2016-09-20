@@ -55,28 +55,38 @@ class Command extends React.Component {
 
     render() {
         let data = this.props.data;
+        let type = data.type;
 
-        return <div onMouseEnter={data.select}>
-        <h2>{data.type}</h2>
+        let { x, y, c1x, c2x, c1y, c2y } = data.snapTo();
+
+        return <div 
+            onMouseEnter={data.select} 
+            style={{
+                opacity: data.selected ? 1 : 0.7,
+            }}>
+
+        <h2>
+            {type}
+        </h2>
         
-        X <input type="text" value={data.x} onChange={this.setX}/>
-        Y <input type="text" value={data.y} onChange={this.setY}/>
+        X <input type="text" value={x} onChange={this.setX}/>
+        Y <input type="text" value={y} onChange={this.setY}/>
 
-        {(data.type == 'C' || data.type == 'Q' || data.type == 'A') &&
+        {(type == 'C' || type == 'Q' || type == 'A') &&
             <span>
-                1X <input type="text" value={data.c1x} onChange={this.set1X}/>
-                1Y <input type="text" value={data.c1y} onChange={this.set1Y}/>
+                1X <input type="text" value={c1x} onChange={this.set1X}/>
+                1Y <input type="text" value={c1y} onChange={this.set1Y}/>
             </span>
         }
 
-        {(data.type == 'C') &&
+        {(type == 'C') &&
             <span>
-                2X <input type="text" value={data.c2x} onChange={this.set2X}/>
-                2Y <input type="text" value={data.c2y} onChange={this.set2Y}/>
+                2X <input type="text" value={c2x} onChange={this.set2X}/>
+                2Y <input type="text" value={c2y} onChange={this.set2Y}/>
             </span>
         }
 
-        {(data.type == 'A') &&
+        {(type == 'A') &&
             <span>
                 rotate <input type="text" value={data.rotate} onChange={this.rotate}/>
                 <button onClick={this.toggleSweep}>{data.sweep?'Clockwise':'Anti Clockwise'}</button>

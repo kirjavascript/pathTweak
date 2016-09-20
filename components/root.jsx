@@ -74,8 +74,9 @@ class Root extends React.Component {
             /#M0,0 (parser)
             h/v path info ??
             https://github.com/mobxjs/mobx-reactive2015-demo/tree/master/src/stores
-            time travel (if certain actions, only update last undo slot (!))
 
+            force snap to grid on state change??
+            time travel (if certain actions, only update last undo slot (!))
             make command a new class (!) have computed x/y snapTo
         */}
 

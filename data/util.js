@@ -1,21 +1,24 @@
+import store from './index';
+
+
 function getPath() {
-    let output = this.commands.map((d) => {
+    let output = store.commands.map((d) => {
         let output = d.type;
         if (d.type == 'C' || d.type == 'Q' || d.type == 'A') {
-            output += `${this::snapTo(d.c1x)},${this::snapTo(d.c1y)} `;
+            output += `${snapTo(d.c1x)},${snapTo(d.c1y)} `;
         }
         if (d.type == 'C') {
-            output += `${this::snapTo(d.c2x)},${this::snapTo(d.c2y)} `;
+            output += `${snapTo(d.c2x)},${snapTo(d.c2y)} `;
         }
         if (d.type == 'A') {
             output += `${d.rotate} ${d.large},${d.sweep}`;
         }
-        output+=`${this::snapTo(d.x)},${this::snapTo(d.y)} `;
+        output+=`${snapTo(d.x)},${snapTo(d.y)} `;
         return output;
 
     });
 
-    if (this.closed) {
+    if (store.closed) {
         output.push('z');
     }
 
@@ -23,7 +26,8 @@ function getPath() {
 }
 
 function snapTo(num) {
-    return this.grid*Math.round(num/this.grid);
+    let grid = store.grid > 0 ? store.grid : 1;
+    return grid*Math.round(num/grid);
 }
 
 export {

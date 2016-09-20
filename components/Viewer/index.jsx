@@ -68,6 +68,10 @@ class Node extends React.Component {
     render() {
         let command = this.props.command;
 
+        let type = command.type;
+
+        let { x, y, c1x, c2x, c1y, c2y } = command.snapTo();
+
         return <g>
             <DraggableCore
                 onStart={onStart}
@@ -75,27 +79,27 @@ class Node extends React.Component {
                 disabled={false}>
                 <circle 
                     onMouseEnter={command.select}
-                    cx={command.x}
-                    cy={command.y}
-                    r={10}
+                    cx={x}
+                    cy={y}
+                    r={9}
                     fill="#f33"
-                    fillOpacity={command.selected ? '0.5' : '0'}/>
+                    fillOpacity={command.selected ? 0.6 : 0.3}/>
             </DraggableCore>
-                {(command.type == 'C' || command.type == 'Q' || command.type == 'A') &&
+                {(type == 'C' || type == 'Q' || type == 'A') &&
                     <Adjust 
                         drag={this.onDragC1}
-                        x={command.x}
-                        y={command.y}
-                        cx={command.c1x}
-                        cy={command.c1y} />
+                        x={x}
+                        y={y}
+                        cx={c1x}
+                        cy={c1y} />
                 }
-                {(command.type == 'C') &&
+                {(type == 'C') &&
                     <Adjust 
                         drag={this.onDragC2}
-                        x={command.x}
-                        y={command.y}
-                        cx={command.c2x}
-                        cy={command.c2y} />
+                        x={x}
+                        y={y}
+                        cx={c2x}
+                        cy={c2y} />
                 }
         </g>;
     }
