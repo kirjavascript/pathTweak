@@ -1,4 +1,4 @@
-import { observable, action, computed } from 'mobx';
+import { observable, autorun, action, computed } from 'mobx';
 
 import { snapTo } from './util';
 
@@ -22,29 +22,35 @@ export default class {
 
     @action select;
 
+    constructor({ type, parent, historic }) {
 
-    constructor(type, parent) {
-
-        this.type = type;
-
-        let i = parent.commands.length;
-        let r = 50 * Math.sqrt(i), a = theta * i;
-
-        this.x = (parent.width / 2 + r * Math.cos(a))|0;
-        this.y = (parent.height / 2 + r * Math.sin(a))|0;
-
-        if (type == 'C' || type == 'Q' || type == 'A') {
-            this.c1x = (parent.width / 2 + r * Math.cos(a)*2)|0;
-            this.c1y = (parent.height / 2 + r * Math.sin(a)/2)|0;
+        if (historic) {
+            Object.keys(historic).forEach((attr) => {
+                this[attr] = historic[attr];
+            });
         }
-        if (type == 'C') {
-            this.c2y = (parent.width / 2 + r * Math.cos(a)/2)|0;
-            this.c2x = (parent.height / 2 + r * Math.sin(a)*2)|0;
-        }
-        if (type == 'A') {
-            this.rotate = 0;
-            this.large = 0;
-            this.sweep = 0;
+        else {
+            this.type = type;
+
+            let i = parent.commands.length;
+            let r = 50 * Math.sqrt(i), a = theta * i;
+
+            this.x = (parent.width / 2 + r * Math.cos(a))|0;
+            this.y = (parent.height / 2 + r * Math.sin(a))|0;
+
+            if (type == 'C' || type == 'Q' || type == 'A') {
+                this.c1x = (parent.width / 2 + r * Math.cos(a)*2)|0;
+                this.c1y = (parent.height / 2 + r * Math.sin(a)/2)|0;
+            }
+            if (type == 'C') {
+                this.c2y = (parent.width / 2 + r * Math.cos(a)/2)|0;
+                this.c2x = (parent.height / 2 + r * Math.sin(a)*2)|0;
+            }
+            if (type == 'A') {
+                this.rotate = 0;
+                this.large = 0;
+                this.sweep = 0;
+            }
         }
 
         this.select = () => {

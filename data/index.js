@@ -1,6 +1,7 @@
-import { action, computed, observable, autorun } from 'mobx';
+import { action, computed, observable } from 'mobx';
 import { getPath } from './util';
 import Command from './command';
+import History from './history';
 
 class Store {
 
@@ -31,7 +32,7 @@ class Store {
     }
 
     @action add(type) {
-        this.commands.push(new Command(type, this));
+        this.commands.push(new Command({type, parent:this}));
     }
 
     @action delete(id) {
@@ -64,12 +65,9 @@ class Store {
 }
 
 
+let store = new Store;
 
+let history = new History(store);
 
-let store = window.store = new Store;
-
-autorun(() => {
-    console.log(store.grid);
-});
-
+export { history };
 export default store;

@@ -5,6 +5,7 @@ import { observer } from 'mobx-react';
 import store from '../data/index';
 import Command from './Command/index.jsx';
 import Viewer from './Viewer/index.jsx';
+import TimeTravel from './TimeTravel/index.jsx';
 import { Flex, Tile } from './Flex/index.jsx';
 
 @observer
@@ -30,6 +31,8 @@ class Root extends React.Component {
         return <div>
 
             <h1>pathTweak</h1>
+
+            <TimeTravel/>
 
             <Flex>
 
@@ -75,6 +78,8 @@ class Root extends React.Component {
             h/v path info ??
             https://github.com/mobxjs/mobx-reactive2015-demo/tree/master/src/stores
 
+            <g> rotate/etc </g>
+            
             force snap to grid on state change??
             time travel (if certain actions, only update last undo slot (!))
             make command a new class (!) have computed x/y snapTo
