@@ -1,4 +1,4 @@
-import { action, computed, observable } from 'mobx';
+import { action, computed, observable, autorun } from 'mobx';
 import { getPath } from './util';
 import Command from './command';
 import History from './history';

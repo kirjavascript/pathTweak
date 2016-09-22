@@ -31,25 +31,37 @@ export default class {
 
         autorun(() => {
 
+            // log commands
             if (this.mutate == -1) {
                 let data = parent.commands
-                    .toJS()
-                    .map((d) => {
-                        delete d.id;
-                        delete d.selected;
-                        return d;
-                    });
+                        .toJS()
+                        .map((d) => {
+                            delete d.id;
+                            delete d.selected;
+                            return d;
+                        });
 
-                let dump = JSON.stringify(data);         
+                let dump = JSON.stringify(data);
+
                 this.history.push(dump);
+            }
+            // snap back to present
+            else {
+
+                let futureLength = this.history.length - this.mutate +1;
+
+                if (parent.commands.filter((d)=>d.selected).length) {
+                    this.history.splice(-futureLength);
+
+                    this.mutate = -1;
+                }
+
             }
 
         });
 
         this.warp = () => {
             let historicArray = JSON.parse(this.history[this.mutate]);
-
-            // nuke selected?
 
             let difference = historicArray.length - parent.commands.length;
 
@@ -68,6 +80,9 @@ export default class {
                         command[attr] = historic[attr];
                     });
                 }
+
+                // selected check to stop time warp
+                command.selected = 0;
 
             });
 

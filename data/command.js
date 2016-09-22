@@ -24,10 +24,11 @@ export default class {
 
     constructor({ type, parent, historic }) {
 
-        this.id = Math.random().toString(36).substring(7);
+        this.id = Math.random().toString(36).slice(2);
 
         if (historic) {
-            historic.id && console.warn('Overwriting a command\'s ID can cause event issues with React');
+            historic.id &&
+            console.warn('Overwriting a command\'s ID can cause event issues with React');
 
             Object.keys(historic).forEach((attr) => {
                 this[attr] = historic[attr];
