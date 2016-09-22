@@ -6,7 +6,7 @@ let theta = Math.PI * (3 - Math.sqrt(5));
 
 export default class {
 
-    @observable id = Math.random().toString(36).substring(7);
+    @observable id;
     @observable selected = 0;
     @observable type;
 
@@ -24,7 +24,11 @@ export default class {
 
     constructor({ type, parent, historic }) {
 
+        this.id = Math.random().toString(36).substring(7);
+
         if (historic) {
+            historic.id && console.warn('Overwriting a command\'s ID can cause event issues with React');
+
             Object.keys(historic).forEach((attr) => {
                 this[attr] = historic[attr];
             });
@@ -52,6 +56,8 @@ export default class {
                 this.sweep = 0;
             }
         }
+
+
 
         this.select = () => {
             parent.commands.forEach((command) => {
