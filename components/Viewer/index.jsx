@@ -2,6 +2,7 @@ import {DraggableCore} from 'react-draggable';
 import { observer } from 'mobx-react';
 import styles from './styles.scss';
 import Axis from './axis.jsx';
+import Menu from './menu.jsx';
 
 const Command = observer((props) => {
 
@@ -46,6 +47,10 @@ class Node extends React.Component {
     constructor(props) {
         super(props);
 
+        this.state = {
+            menuActive: false
+        };
+
         let command = this.props.command;
 
         this.onDrag = (e, dragEvent) => {
@@ -78,6 +83,14 @@ class Node extends React.Component {
             command.x2 += dragEvent.deltaX;
             command.y2 += dragEvent.deltaY;
         };
+
+        this.openMenu = (e) => {
+            e.preventDefault();
+            this.setState({menuActive:true});
+        };
+        this.closeMenu = (e) => {
+            this.setState({menuActive:false});
+        };
     }
 
     render() {
@@ -89,25 +102,25 @@ class Node extends React.Component {
 
         let { x, y, x1, x2, y1, y2 } = command.snapTo();
 
-        if (type == 'H') {
-            y = command.getHY();
-        }
-        else if (type == 'V') {
-            x = command.getVX();
-        }
+        return (
+            <g 
+                onMouseEnter={command.select}
+                onMouseLeave={this.closeMenu}
+                className={styles.group}>
 
-        return <g onMouseEnter={command.select} className={styles.group}>
-            <DraggableCore
-                onStart={onStart}
-                onDrag={this.onDrag}>
-                <circle 
-                    cx={x}
-                    cy={y}
-                    r={9}
-                    fill="#c06973"
-                    fillOpacity={command.selected ? 0.6 : 0.3}
-                    className={styles[type]}/>
-            </DraggableCore>
+                <DraggableCore
+                    onStart={onStart}
+                    onDrag={this.onDrag}>
+                    <circle
+                        onContextMenu={this.openMenu}
+                        cx={x}
+                        cy={y}
+                        r={9}
+                        fill="#c06973"
+                        fillOpacity={command.selected ? 0.6 : 0.3}
+                        className={styles[type]}/>
+                </DraggableCore>
+
                 {(type == 'C' || type == 'Q' || type == 'A') &&
                     <Adjust 
                         drag={this.onDragC1}
@@ -124,7 +137,10 @@ class Node extends React.Component {
                         cx={x2}
                         cy={y2} />
                 }
-        </g>;
+
+                <Menu active={this.state.menuActive} data={command}/>
+            </g>
+        );
     }
 }
 

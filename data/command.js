@@ -74,30 +74,55 @@ export default class {
         };
 
         this.snapTo = () => {
+
+            let x, y;
+
+            if (this.type == 'V') {
+                x = this.getVX();
+            }
+            else {
+                x = snapTo(this.x);
+            }
+            if (this.type == 'H') {
+                y = this.getHY();
+            }
+            else {
+                y = snapTo(this.y);
+            }
+
             return {
-                x: snapTo(this.x),
+                x,
+                y,
                 x1: snapTo(this.x1),
                 x2: snapTo(this.x2),
-                y: snapTo(this.y),
                 y1: snapTo(this.y1),
                 y2: snapTo(this.y2),
             };
         };
 
         this.getHY = () => {
-            let index = parent.getIndexById(this.id);
+            let index = this.getIndex();
 
             if (index) {
-                return parent.commands[index-1].y;
+                return snapTo(parent.commands[index-1].y);
             }
         };
 
         this.getVX = () => {
-            let index = parent.getIndexById(this.id);
+            let index = this.getIndex();
 
             if (index) {
-                return parent.commands[index-1].x;
+                return snapTo(parent.commands[index-1].x);
             }
+        };
+
+        this.getIndex = () => {
+            return parent.getIndexById(this.id);
+        };
+
+        this.delete = () => {
+            let index = this.getIndex();
+            parent.commands.splice(index, 1);
         };
 
     }

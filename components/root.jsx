@@ -3,27 +3,27 @@ import { render } from 'react-dom';
 import { observer } from 'mobx-react';
 
 import store from '../data/index';
-import Command from './Command/index.jsx';
+import Commands from './Commands/index.jsx';
 import Viewer from './Viewer/index.jsx';
 import ComputedPath from './ComputedPath/index.jsx';
 import TimeTravel from './TimeTravel/index.jsx';
 import { Flex, Tile, Colour, AbsPos, Icon } from './UI/index.jsx';
 
 {/*
-    force snap to grid on state change??
+    electron
+    serialize to localstorage
     lowercase output
-    add S/T Z in middle of path?
+    select multiple (d3-brush?)
     // freehand draw!
+    add S/T Z in middle of path?
+    force snap to grid on state change??
 
-    
-    <g> rotate/etc </g> 
-    url shortener api thingy save icon?
     README? ever need to makea  quick path - right click explain
-    right click delete / hover stats
-    one command at a time
-    clear icon / close unclose
+    #M300,300H600Q650,300 650,350V400Q650,450 600,450H300z
+    
+    url shortener api thingy save icon?http://stackoverflow.com/questions/35544698/generate-tinyurl-with-client-side-javascript-need-cors-workaround
+    <g> rotate/etc </g> 
 
-    https://upload.wikimedia.org/wikipedia/commons/4/42/Love_Heart_SVG.svg
 */}
 
 @observer
@@ -54,8 +54,17 @@ class Root extends React.Component {
 
             <h1>&lt;<Colour is="red">pathTweak</Colour>/&gt;</h1>
 
-            <AbsPos pos="-1 0 10 0" align="center">
-                <ComputedPath store={store}/>
+            <AbsPos pos="58 -1 -1 0">
+                &nbsp;SnapTo
+                <input 
+                    className={styles.snapTo}
+                    type="text"
+                    value={store.grid}
+                    onChange={::store.setGrid}/>
+            </AbsPos>
+
+            <AbsPos pos="6 -1 -1 230">
+                <Commands commands={store.commands} />
             </AbsPos>
 
             <AbsPos pos="5 5 -1 -1">
@@ -86,39 +95,10 @@ class Root extends React.Component {
 
             </AbsPos>
 
+            <AbsPos pos="-1 0 20 0" align="center">
+                <ComputedPath store={store}/>
+            </AbsPos>
 
-            <div style={{display:'none'}}>
-
-            <Flex>
-
-                <Tile>
-
-                    
-
-                </Tile>
-
-                <Tile>
-
-                    Snap To: 
-                    <input type="text" value={store.grid} onChange={::store.setGrid}/>
-
-
-
-                    <button onClick={::store.closePath}>
-                        
-                    </button>
-                    <button>
-                        Clear
-                    </button>
-
-                    {store.commands.map((command) => {
-                        return <Command key={command.id} data={command}/>;
-                    })}
-                </Tile>
-
-            </Flex>
-
-            </div>
         </div>;
     }
 }

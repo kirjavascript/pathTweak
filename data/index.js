@@ -29,11 +29,6 @@ class Store {
         this.commands.push(new Command({type, parent:this}));
     }
 
-    @action delete(id) {
-        let index = this.getIndexById(id);
-        this.commands.splice(index, 1);
-    }
-
     @action up(id) {
         let index = this.getIndexById(id);
         if (index != 0) {

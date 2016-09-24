@@ -59,6 +59,5 @@ export {
     Tile,
     Colour,
     AbsPos,
-    Icon,
-    colours
+    Icon
 };
