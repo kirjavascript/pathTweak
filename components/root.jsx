@@ -7,20 +7,21 @@ import Command from './Command/index.jsx';
 import Viewer from './Viewer/index.jsx';
 import ComputedPath from './ComputedPath/index.jsx';
 import TimeTravel from './TimeTravel/index.jsx';
-import { Flex, Tile } from './Flex/index.jsx';
+import { Flex, Tile, Colour } from './UI/index.jsx';
 
 {/*
     fill stroke stroke-width
     (calculate smallest int) <path
-    <g> rotate/etc </g> 
     force snap to grid on state change??
+    lowercase output
+    fix H/V UI, add S/T Z in middle of path?
+    
+    <g> rotate/etc </g> 
+    icons on right for types of thing :)
     d3 axis?!
     // fullscreen path (!)
-    icons on right for types of thing :)
-    lowercase input/output
-    <pathTweak/> style
-    fix H/V UI, add S/T
-    Z in middle of path?
+
+    load svg heart
 */}
 
 @observer
@@ -47,7 +48,7 @@ class Root extends React.Component {
 
         return <div>
 
-            <h1>pathTweak</h1>
+            <h1>&lt;<Colour is="red">pathTweak</Colour>/&gt;</h1>
 
             <TimeTravel/>
 

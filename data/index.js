@@ -6,11 +6,7 @@ import History from './history';
 class Store {
 
     @observable commands = [];
-
     @observable closed = 0;
-    @observable fill = '#3399ff';
-    @observable stroke = '#000000';
-    @observable strokeWidth = 2;
     @observable width = 500;
     @observable height = 500;
     @observable grid = 1;

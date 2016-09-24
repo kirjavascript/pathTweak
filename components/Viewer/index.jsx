@@ -7,6 +7,15 @@ const Command = observer((props) => {
 
     return <svg xmlns="http://www.w3.org/2000/svg" width={store.width} height={store.height}>
         <rect x="0" y="0"  width={store.width} height={store.height} fill="none" stroke="black"/>
+
+
+        <path
+            d={store.path}
+            fill="#a6b2c0"
+            fillOpacity="0.2"
+            stroke="#a6b2c0"
+            strokeWidth={2}
+            style={{pointerEvents:'none'}}/>
         <g>
             {store.commands.map((command) => {
 
@@ -15,14 +24,6 @@ const Command = observer((props) => {
                     command={command}/>;
             })}
         </g>    
-
-        <path
-            d={store.path}
-            fill={store.fill}
-            fillOpacity="0.2"
-            stroke={store.stroke}
-            strokeWidth={store.strokeWidth}
-            style={{pointerEvents:'none'}}/>
     </svg>;
 
 });
@@ -90,7 +91,7 @@ class Node extends React.Component {
                     cx={x}
                     cy={y}
                     r={9}
-                    fill="#f33"
+                    fill="#c06973"
                     fillOpacity={command.selected ? 0.6 : 0.3}/>
             </DraggableCore>
                 {(type == 'C' || type == 'Q' || type == 'A') &&
@@ -109,14 +110,6 @@ class Node extends React.Component {
                         cx={x2}
                         cy={y2} />
                 }
-                {type == 'A' && 
-                    <circle 
-                        cx={x + (Math.cos(rotate/Math.PI/18.5)*100)}
-                        cy={y + (Math.sin(rotate/Math.PI/18.5)*100)}
-                        r={5}
-                        fill="#39f"
-                        fillOpacity="1"/>
-                }
         </g>;
     }
 }
@@ -131,7 +124,7 @@ const Adjust = (props) => {
                 cx={props.cx}
                 cy={props.cy}
                 r={5}
-                fill="#39f"
+                fill="#c679dd"
                 fillOpacity="1"/>
         </DraggableCore>
         <line 
