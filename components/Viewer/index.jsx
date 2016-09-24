@@ -78,7 +78,6 @@ class Node extends React.Component {
             command.x2 += dragEvent.deltaX;
             command.y2 += dragEvent.deltaY;
         };
-
     }
 
     render() {
@@ -97,17 +96,17 @@ class Node extends React.Component {
             x = command.getVX();
         }
 
-        return <g onMouseEnter={command.select}>
+        return <g onMouseEnter={command.select} className={styles.group}>
             <DraggableCore
                 onStart={onStart}
-                onDrag={this.onDrag}
-                disabled={false}>
+                onDrag={this.onDrag}>
                 <circle 
                     cx={x}
                     cy={y}
                     r={9}
                     fill="#c06973"
-                    fillOpacity={command.selected ? 0.6 : 0.3}/>
+                    fillOpacity={command.selected ? 0.6 : 0.3}
+                    className={styles[type]}/>
             </DraggableCore>
                 {(type == 'C' || type == 'Q' || type == 'A') &&
                     <Adjust 
@@ -140,7 +139,8 @@ const Adjust = (props) => {
                 cy={props.cy}
                 r={5}
                 fill="#c679dd"
-                fillOpacity="1"/>
+                fillOpacity="1"
+                className={styles.move}/>
         </DraggableCore>
         <line 
             x1={props.x}

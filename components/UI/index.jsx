@@ -48,6 +48,8 @@ const AbsPos = (props) => {
 
 const Icon = (props) => 
     <img 
+        alt={props.name}
+        title={props.name}
         onClick={props.onClick}
         className={styles.icon}
         src={require(`./icons/${props.name}.svg`)}/>;

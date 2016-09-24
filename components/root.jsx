@@ -12,15 +12,16 @@ import { Flex, Tile, Colour, AbsPos, Icon } from './UI/index.jsx';
 {/*
     force snap to grid on state change??
     lowercase output
-    fix H/V UI, add S/T Z in middle of path?
+    add S/T Z in middle of path?
     // freehand draw!
 
     
     <g> rotate/etc </g> 
-    favicon
-    README? ever need to makea  quick path
+    url shortener api thingy save icon?
+    README? ever need to makea  quick path - right click explain
+    right click delete / hover stats
     one command at a time
-    clear icon
+    clear icon / close unclose
 
     https://upload.wikimedia.org/wikipedia/commons/4/42/Love_Heart_SVG.svg
 */}
@@ -62,18 +63,27 @@ class Root extends React.Component {
             </AbsPos>
 
             <AbsPos pos="100 10 -1 -1">
+
                 {this.commandList.map((command, i) => {
                     return <Icon 
                         key={i}
                         name={command.name}
                         onClick={store.add.bind(store, command.type)}/>;
                 })}
+                <Icon 
+                    name={store.closed ? 'unclose' : 'close'}
+                    onClick={::store.closePath}/>
+                <Icon 
+                    name="clear"
+                    onClick={::store.clear}/>
+
                 <a href="http://github.com/kirjavascript/pathTweak" target="_blank">
                     <Icon name="github" onClick={this.github}/>
                 </a>
                 <a href="http://kirjava.xyz" target="_blank">
                     <Icon name="heart" onClick={this.heart}/>
                 </a>
+
             </AbsPos>
 
 
@@ -95,9 +105,9 @@ class Root extends React.Component {
 
 
                     <button onClick={::store.closePath}>
-                        {store.closed ? 'Unclose' : 'Close'}
+                        
                     </button>
-                    <button onClick={::store.clear}>
+                    <button>
                         Clear
                     </button>
 

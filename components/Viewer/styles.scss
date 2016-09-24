@@ -21,3 +21,23 @@ $white: #a6b2c0;
         }
     }
 }
+
+.move, .M, .L, .Q, .C, .A {
+    cursor: move;
+}
+
+.H {
+    cursor: ew-resize;
+}
+
+.V {
+    cursor: ns-resize;
+}
+
+.group {
+    :global {
+        line {
+            pointer-events: none;
+        }
+    }
+}

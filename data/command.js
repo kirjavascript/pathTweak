@@ -40,8 +40,8 @@ export default class {
             let i = parent.commands.length;
             let r = 50 * Math.sqrt(i), a = theta * i;
 
-            let width = window.innerWidth;
-            let height = window.innerHeight;
+            let width = window.innerWidth-60;
+            let height = window.innerHeight-80;
 
             if (type != 'V') {
                 this.x = (width / 2 + r * Math.cos(a))|0;
