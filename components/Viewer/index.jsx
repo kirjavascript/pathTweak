@@ -1,30 +1,39 @@
 import {DraggableCore} from 'react-draggable';
 import { observer } from 'mobx-react';
+import styles from './styles.scss';
+import Axis from './axis.jsx';
 
 const Command = observer((props) => {
 
     let store = props.store;
 
-    return <svg xmlns="http://www.w3.org/2000/svg" width={store.width} height={store.height}>
-        <rect x="0" y="0"  width={store.width} height={store.height} fill="none" stroke="black"/>
+    return (
+    <svg 
+        className={styles.viewer}
+        xmlns="http://www.w3.org/2000/svg">
+        
+        <Axis/>
 
+        <g transform={'translate(60,80)'}>
+            <path
+                d={store.path}
+                fill="#a6b2c0"
+                fillOpacity="0.2"
+                stroke="#a6b2c0"
+                strokeWidth={2}
+                style={{pointerEvents:'none'}}/>
+            <g>
+                {store.commands.map((command) => {
 
-        <path
-            d={store.path}
-            fill="#a6b2c0"
-            fillOpacity="0.2"
-            stroke="#a6b2c0"
-            strokeWidth={2}
-            style={{pointerEvents:'none'}}/>
-        <g>
-            {store.commands.map((command) => {
+                    return <Node 
+                        key={command.id}
+                        command={command}/>;
+                })}
+            </g>    
+        </g>
 
-                return <Node 
-                    key={command.id}
-                    command={command}/>;
-            })}
-        </g>    
-    </svg>;
+    </svg>
+    );
 
 });
 
@@ -81,13 +90,19 @@ class Node extends React.Component {
 
         let { x, y, x1, x2, y1, y2 } = command.snapTo();
 
-        return <g>
+        if (type == 'H') {
+            y = command.getHY();
+        }
+        else if (type == 'V') {
+            x = command.getVX();
+        }
+
+        return <g onMouseEnter={command.select}>
             <DraggableCore
                 onStart={onStart}
                 onDrag={this.onDrag}
                 disabled={false}>
                 <circle 
-                    onMouseEnter={command.select}
                     cx={x}
                     cy={y}
                     r={9}

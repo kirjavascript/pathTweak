@@ -1,0 +1,7 @@
+﻿<svg xmlns="http://www.w3.org/2000/svg" width="50" height="50" viewBox="0 0 50 50" >
+    <rect rx="5" ry="5" x="0" y="0" width="50" height="50" fill="#3d4350"/>
+    <text x="4" y="14" font-family="sans-serif" font-size="12" fill="#a6b2c0" font-weight="bold">
+        L
+    </text>
+    <path transform="translate(-3,-3),scale(0.75)" fill="#a6b2c0" fill-opacity="1" stroke-width="0.2" stroke-linejoin="round" d="M 23,55L 18,55L 18,50L 21,50L 53,24L 53,21L 58,21L 58,26L 55,26L 23,52L 23,55 Z M 54,22L 54,25L 57,25L 57,22L 54,22 Z M 19,51L 19,54L 22,54L 22,51L 19,51 Z "/>
+</svg>

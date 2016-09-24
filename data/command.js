@@ -40,19 +40,22 @@ export default class {
             let i = parent.commands.length;
             let r = 50 * Math.sqrt(i), a = theta * i;
 
+            let width = window.innerWidth;
+            let height = window.innerHeight;
+
             if (type != 'V') {
-                this.x = (parent.width / 2 + r * Math.cos(a))|0;
+                this.x = (width / 2 + r * Math.cos(a))|0;
             }
             if (type != 'H') {
-                this.y = (parent.height / 2 + r * Math.sin(a))|0;
+                this.y = (height / 2 + r * Math.sin(a))|0;
             }
             if (type == 'C' || type == 'Q' || type == 'A') {
-                this.x1 = (parent.width / 2 + r * Math.cos(a)*2)|0;
-                this.y1 = (parent.height / 2 + r * Math.sin(a)/2)|0;
+                this.x1 = (width / 2 + r * Math.cos(a)*2)|0;
+                this.y1 = (height / 2 + r * Math.sin(a)/2)|0;
             }
             if (type == 'C') {
-                this.y2 = (parent.width / 2 + r * Math.cos(a)/2)|0;
-                this.x2 = (parent.height / 2 + r * Math.sin(a)*2)|0;
+                this.y2 = (width / 2 + r * Math.cos(a)/2)|0;
+                this.x2 = (height / 2 + r * Math.sin(a)*2)|0;
             }
             if (type == 'A') {
                 this.rotate = 0;
@@ -79,6 +82,22 @@ export default class {
                 y1: snapTo(this.y1),
                 y2: snapTo(this.y2),
             };
+        };
+
+        this.getHY = () => {
+            let index = parent.getIndexById(this.id);
+
+            if (index) {
+                return parent.commands[index-1].y;
+            }
+        };
+
+        this.getVX = () => {
+            let index = parent.getIndexById(this.id);
+
+            if (index) {
+                return parent.commands[index-1].x;
+            }
         };
 
     }

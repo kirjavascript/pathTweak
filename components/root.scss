@@ -8,7 +8,6 @@
 
 
 html, body {
-    height: 100%;
     font-family: 'Inconsolata', sans-serif;
     margin: 0px;
     padding: 0px;
@@ -19,13 +18,14 @@ html, body {
 a {
     text-decoration: none;
     font-weight: bold;
-    color: #3399ff;
+    color: #272b33;
     letter-spacing: -1px;
 
     &:active,
     &:visited,
     &:hover,
     &:link {
+        color: #272b33;
         text-decoration: none;
     }
 }
@@ -50,8 +50,11 @@ input {
 }
 
 h1 {
-    margin: 10px 10px;
-
+    margin: 10px 0px;
+    font-size: 32px;
+    position: absolute;
+    top: -5px;
+    left: 5px;
 }
 
 h2 {

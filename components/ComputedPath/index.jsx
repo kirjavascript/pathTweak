@@ -1,5 +1,5 @@
 import { observer } from 'mobx-react';
-import styles from './index.scss';
+import styles from './styles.scss';
 import { Colour } from '../UI/index.jsx';
 import debounce from 'lodash.debounce';
 

@@ -1,0 +1,46 @@
+.time {
+
+    input {
+        background: none;
+        box-shadow: none;
+        padding: 0 5px;
+        margin: 0;
+        width: 400px;
+        max-width: none;
+        -webkit-appearance: none;
+        border-radius: 8px;
+        height: 10px;
+        border: none;
+        background-color: #444a58;
+    }
+
+    input::-webkit-slider-thumb {
+        -webkit-appearance: none;
+        background: #96a2b0;
+        border: none;
+        width: 20px;
+        height: 10px;
+        border-radius: 5px;
+        cursor: pointer;
+    }
+
+    input::-moz-range-track {
+        border-radius: 8px;
+        height: 10px;
+        border: none;
+        background-color: #444a58;
+    }
+    input::-moz-range-thumb {
+        background: #96a2b0;
+        border: none;
+        width: 20px;
+        height: 10px;
+        border-radius: 5px;
+        cursor: pointer;
+    }
+}
+
+.stats {
+    text-align: right;
+    padding: 0 5px;
+}

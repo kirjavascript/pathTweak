@@ -7,21 +7,22 @@ import Command from './Command/index.jsx';
 import Viewer from './Viewer/index.jsx';
 import ComputedPath from './ComputedPath/index.jsx';
 import TimeTravel from './TimeTravel/index.jsx';
-import { Flex, Tile, Colour } from './UI/index.jsx';
+import { Flex, Tile, Colour, AbsPos, Icon } from './UI/index.jsx';
 
 {/*
-    fill stroke stroke-width
-    (calculate smallest int) <path
     force snap to grid on state change??
     lowercase output
     fix H/V UI, add S/T Z in middle of path?
+    // freehand draw!
+
     
     <g> rotate/etc </g> 
-    icons on right for types of thing :)
-    d3 axis?!
-    // fullscreen path (!)
+    favicon
+    README? ever need to makea  quick path
+    one command at a time
+    clear icon
 
-    load svg heart
+    https://upload.wikimedia.org/wikipedia/commons/4/42/Love_Heart_SVG.svg
 */}
 
 @observer
@@ -31,13 +32,13 @@ class Root extends React.Component {
         super(props);
 
         this.commandList = [
-            {name:'Move', type: 'M'},
-            {name:'Line', type: 'L'},
-            // {name:'HLine', type: 'H'},
-            // {name:'VLine', type: 'V'},
-            {name:'Quadratic', type: 'Q'},
-            {name:'Bezier', type: 'C'},
-            {name:'Arc', type: 'A'},
+            {name:'move', type: 'M'},
+            {name:'line', type: 'L'},
+            {name:'horizontal', type: 'H'},
+            {name:'vertical', type: 'V'},
+            {name:'quadratic', type: 'Q'},
+            {name:'bezier', type: 'C'},
+            {name:'arc', type: 'A'},
         ];
 
     }
@@ -48,16 +49,41 @@ class Root extends React.Component {
 
         return <div>
 
+            <Viewer store={store}/>
+
             <h1>&lt;<Colour is="red">pathTweak</Colour>/&gt;</h1>
 
-            <TimeTravel/>
+            <AbsPos pos="-1 0 10 0" align="center">
+                <ComputedPath store={store}/>
+            </AbsPos>
+
+            <AbsPos pos="5 5 -1 -1">
+                <TimeTravel/>
+            </AbsPos>
+
+            <AbsPos pos="100 10 -1 -1">
+                {this.commandList.map((command, i) => {
+                    return <Icon 
+                        key={i}
+                        name={command.name}
+                        onClick={store.add.bind(store, command.type)}/>;
+                })}
+                <a href="http://github.com/kirjavascript/pathTweak" target="_blank">
+                    <Icon name="github" onClick={this.github}/>
+                </a>
+                <a href="http://kirjava.xyz" target="_blank">
+                    <Icon name="heart" onClick={this.heart}/>
+                </a>
+            </AbsPos>
+
+
+            <div style={{display:'none'}}>
 
             <Flex>
 
                 <Tile>
 
-                    <Viewer store={store}/>
-                    <ComputedPath store={store}/>
+                    
 
                 </Tile>
 
@@ -66,11 +92,7 @@ class Root extends React.Component {
                     Snap To: 
                     <input type="text" value={store.grid} onChange={::store.setGrid}/>
 
-                    {this.commandList.map((command, i) => {
-                        return <button key={i} onClick={store.add.bind(store, command.type)}>
-                            {command.name}
-                        </button>;
-                    })}
+
 
                     <button onClick={::store.closePath}>
                         {store.closed ? 'Unclose' : 'Close'}
@@ -86,6 +108,7 @@ class Root extends React.Component {
 
             </Flex>
 
+            </div>
         </div>;
     }
 }

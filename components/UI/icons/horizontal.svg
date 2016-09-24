@@ -1,0 +1,7 @@
+﻿<svg xmlns="http://www.w3.org/2000/svg" width="50" height="50" viewBox="0 0 50 50" >
+    <rect rx="5" ry="5" x="0" y="0" width="50" height="50" fill="#3d4350"/>
+    <text x="4" y="14" font-family="sans-serif" font-size="12" fill="#a6b2c0" font-weight="bold">
+        H
+    </text>
+    <path transform="translate(-3,-3),scale(0.75)" fill="#a6b2c0" fill-opacity="1" stroke-width="0.2" stroke-linejoin="round" d="M 57,45L 57,39.1667L 51,45L 51,40L 25,40L 25,45L 19,39.1666L 19,44.9999L 16,44.9999L 16,30.9999L 19,30.9999L 19,36.8333L 25,31L 25,36L 51,36L 51,31L 57,36.8334L 57,31L 60,31L 60,45L 57,45 Z "/>
+</svg>

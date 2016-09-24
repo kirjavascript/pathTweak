@@ -7,8 +7,6 @@ class Store {
 
     @observable commands = [];
     @observable closed = 0;
-    @observable width = 500;
-    @observable height = 500;
     @observable grid = 1;
 
     getIndexById(id) {

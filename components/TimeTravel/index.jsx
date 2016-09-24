@@ -1,7 +1,7 @@
 import { observer } from 'mobx-react';
 
 import { history } from '../../data/index';
-import styles from './time.scss';
+import styles from './styles.scss';
 
 const TimeTravel = observer((props) => {
 
