@@ -5,8 +5,23 @@ import { observer } from 'mobx-react';
 import store from '../data/index';
 import Command from './Command/index.jsx';
 import Viewer from './Viewer/index.jsx';
+import ComputedPath from './ComputedPath/index.jsx';
 import TimeTravel from './TimeTravel/index.jsx';
 import { Flex, Tile } from './Flex/index.jsx';
+
+{/*
+    fill stroke stroke-width
+    (calculate smallest int) <path
+    <g> rotate/etc </g> 
+    force snap to grid on state change??
+    d3 axis?!
+    // fullscreen path (!)
+    icons on right for types of thing :)
+    lowercase input/output
+    <pathTweak/> style
+    fix H/V UI, add S/T
+    Z in middle of path?
+*/}
 
 @observer
 class Root extends React.Component {
@@ -17,6 +32,8 @@ class Root extends React.Component {
         this.commandList = [
             {name:'Move', type: 'M'},
             {name:'Line', type: 'L'},
+            // {name:'HLine', type: 'H'},
+            // {name:'VLine', type: 'V'},
             {name:'Quadratic', type: 'Q'},
             {name:'Bezier', type: 'C'},
             {name:'Arc', type: 'A'},
@@ -37,11 +54,10 @@ class Root extends React.Component {
             <Flex>
 
                 <Tile>
-                    <Viewer store={store}/>
 
-                    <div style={{
-                        maxWidth: store.width
-                    }}>{store.path}</div>
+                    <Viewer store={store}/>
+                    <ComputedPath store={store}/>
+
                 </Tile>
 
                 <Tile>
@@ -62,28 +78,12 @@ class Root extends React.Component {
                         Clear
                     </button>
 
-                    
-
                     {store.commands.map((command) => {
                         return <Command key={command.id} data={command}/>;
                     })}
                 </Tile>
 
             </Flex>
-
-
-        {/*
-            fill stroke stroke-width
-            /#M0,0 (parser)
-            h/v path info ??
-            https://github.com/mobxjs/mobx-reactive2015-demo/tree/master/src/stores
-
-            <g> rotate/etc </g>
-            
-            force snap to grid on state change??
-            time travel (if certain actions, only update last undo slot (!))
-            make command a new class (!) have computed x/y snapTo
-        */}
 
         </div>;
     }

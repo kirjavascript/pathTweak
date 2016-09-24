@@ -12,10 +12,10 @@ export default class {
 
     @observable x;
     @observable y;
-    @observable c1x;
-    @observable c2x;
-    @observable c1y;
-    @observable c2y;
+    @observable x1;
+    @observable x2;
+    @observable y1;
+    @observable y2;
     @observable rotate;
     @observable large;
     @observable sweep;
@@ -40,16 +40,19 @@ export default class {
             let i = parent.commands.length;
             let r = 50 * Math.sqrt(i), a = theta * i;
 
-            this.x = (parent.width / 2 + r * Math.cos(a))|0;
-            this.y = (parent.height / 2 + r * Math.sin(a))|0;
-
+            if (type != 'V') {
+                this.x = (parent.width / 2 + r * Math.cos(a))|0;
+            }
+            if (type != 'H') {
+                this.y = (parent.height / 2 + r * Math.sin(a))|0;
+            }
             if (type == 'C' || type == 'Q' || type == 'A') {
-                this.c1x = (parent.width / 2 + r * Math.cos(a)*2)|0;
-                this.c1y = (parent.height / 2 + r * Math.sin(a)/2)|0;
+                this.x1 = (parent.width / 2 + r * Math.cos(a)*2)|0;
+                this.y1 = (parent.height / 2 + r * Math.sin(a)/2)|0;
             }
             if (type == 'C') {
-                this.c2y = (parent.width / 2 + r * Math.cos(a)/2)|0;
-                this.c2x = (parent.height / 2 + r * Math.sin(a)*2)|0;
+                this.y2 = (parent.width / 2 + r * Math.cos(a)/2)|0;
+                this.x2 = (parent.height / 2 + r * Math.sin(a)*2)|0;
             }
             if (type == 'A') {
                 this.rotate = 0;
@@ -70,11 +73,11 @@ export default class {
         this.snapTo = () => {
             return {
                 x: snapTo(this.x),
-                c1x: snapTo(this.c1x),
-                c2x: snapTo(this.c2x),
+                x1: snapTo(this.x1),
+                x2: snapTo(this.x2),
                 y: snapTo(this.y),
-                c1y: snapTo(this.c1y),
-                c2y: snapTo(this.c2y),
+                y1: snapTo(this.y1),
+                y2: snapTo(this.y2),
             };
         };
 

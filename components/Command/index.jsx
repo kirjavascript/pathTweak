@@ -17,17 +17,17 @@ class Command extends React.Component {
         };
 
         this.set1X = (e) => {
-            data.c1x = +e.target.value;
+            data.x1 = +e.target.value;
         };
         this.set1Y = (e) => {
-            data.c1y = +e.target.value;
+            data.y1 = +e.target.value;
         };
 
         this.set2X = (e) => {
-            data.c2x = +e.target.value;
+            data.x2 = +e.target.value;
         };
         this.set2Y = (e) => {
-            data.c2y = +e.target.value;
+            data.y2 = +e.target.value;
         };
 
         this.delete = () => {
@@ -57,7 +57,7 @@ class Command extends React.Component {
         let data = this.props.data;
         let type = data.type;
 
-        let { x, y, c1x, c2x, c1y, c2y } = data.snapTo();
+        let { x, y, x1, x2, y1, y2 } = data.snapTo();
 
         return <div 
             onMouseEnter={data.select} 
@@ -68,21 +68,32 @@ class Command extends React.Component {
         <h2>
             {type}
         </h2>
-        
-        X <input type="text" value={x} onChange={this.setX}/>
-        Y <input type="text" value={y} onChange={this.setY}/>
+
+        {type != 'V' && 
+            <span>
+                X 
+                <input type="text" value={x} onChange={this.setX}/>
+            </span>
+        }
+
+        {type != 'H' && 
+            <span>
+                Y 
+                <input type="text" value={y} onChange={this.setY}/>
+            </span>
+        }
 
         {(type == 'C' || type == 'Q' || type == 'A') &&
             <span>
-                1X <input type="text" value={c1x} onChange={this.set1X}/>
-                1Y <input type="text" value={c1y} onChange={this.set1Y}/>
+                1X <input type="text" value={x1} onChange={this.set1X}/>
+                1Y <input type="text" value={y1} onChange={this.set1Y}/>
             </span>
         }
 
         {(type == 'C') &&
             <span>
-                2X <input type="text" value={c2x} onChange={this.set2X}/>
-                2Y <input type="text" value={c2y} onChange={this.set2Y}/>
+                2X <input type="text" value={x2} onChange={this.set2X}/>
+                2Y <input type="text" value={y2} onChange={this.set2Y}/>
             </span>
         }
 

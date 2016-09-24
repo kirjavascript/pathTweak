@@ -1,7 +1,7 @@
 import {DraggableCore} from 'react-draggable';
 import { observer } from 'mobx-react';
 
-const Command = (props) => {
+const Command = observer((props) => {
 
     let store = props.store;
 
@@ -25,7 +25,7 @@ const Command = (props) => {
             style={{pointerEvents:'none'}}/>
     </svg>;
 
-};
+});
 
 function onStart(e) {
     e.preventDefault();
@@ -40,8 +40,14 @@ class Node extends React.Component {
 
         this.onDrag = (e, dragEvent) => {
             e.preventDefault();
-            command.x += dragEvent.deltaX;
-            command.y += dragEvent.deltaY;
+
+            if (command.type != 'V') {
+                command.x += dragEvent.deltaX;
+            }
+            if (command.type != 'H') {
+                command.y += dragEvent.deltaY;
+            }
+
             if (command.type == 'C' || command.type == 'Q' || command.type == 'A') {
                 this.onDragC1(e, dragEvent);
             }
@@ -53,14 +59,14 @@ class Node extends React.Component {
 
         this.onDragC1 = (e, dragEvent) => {
             e.preventDefault();
-            command.c1x += dragEvent.deltaX;
-            command.c1y += dragEvent.deltaY;
+            command.x1 += dragEvent.deltaX;
+            command.y1 += dragEvent.deltaY;
         };
 
         this.onDragC2 = (e, dragEvent) => {
             e.preventDefault();
-            command.c2x += dragEvent.deltaX;
-            command.c2y += dragEvent.deltaY;
+            command.x2 += dragEvent.deltaX;
+            command.y2 += dragEvent.deltaY;
         };
 
     }
@@ -70,7 +76,9 @@ class Node extends React.Component {
 
         let type = command.type;
 
-        let { x, y, c1x, c2x, c1y, c2y } = command.snapTo();
+        let { rotate } = command;
+
+        let { x, y, x1, x2, y1, y2 } = command.snapTo();
 
         return <g>
             <DraggableCore
@@ -90,16 +98,24 @@ class Node extends React.Component {
                         drag={this.onDragC1}
                         x={x}
                         y={y}
-                        cx={c1x}
-                        cy={c1y} />
+                        cx={x1}
+                        cy={y1} />
                 }
                 {(type == 'C') &&
                     <Adjust 
                         drag={this.onDragC2}
                         x={x}
                         y={y}
-                        cx={c2x}
-                        cy={c2y} />
+                        cx={x2}
+                        cy={y2} />
+                }
+                {type == 'A' && 
+                    <circle 
+                        cx={x + (Math.cos(rotate/Math.PI/18.5)*100)}
+                        cy={y + (Math.sin(rotate/Math.PI/18.5)*100)}
+                        r={5}
+                        fill="#39f"
+                        fillOpacity="1"/>
                 }
         </g>;
     }

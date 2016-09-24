@@ -1,5 +1,5 @@
 import { action, computed, observable, autorun } from 'mobx';
-import { getPath } from './util';
+import { getPath, parsePath } from './util';
 import Command from './command';
 import History from './history';
 
@@ -62,8 +62,21 @@ class Store {
         this.closed = +(!this.closed);
     }
 
-}
+    constructor() {
 
+        let urlPath = decodeURI(location.hash).slice(1).trim();
+
+        try {
+            this::parsePath(urlPath);
+        }
+        catch(e) {
+            // if path is invalid or doesn't exist
+            this.commands.push(new Command({type: 'M', parent: this}));
+        }
+        
+    }
+
+}
 
 let store = new Store;
 
