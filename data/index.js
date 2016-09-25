@@ -6,7 +6,6 @@ import History from './history';
 class Store {
 
     @observable commands = [];
-    @observable closed = 0;
     @observable grid = 1;
 
     getIndexById(id) {
@@ -45,10 +44,6 @@ class Store {
             this.commands[index+1] = temp;
         }
 
-    }
-
-    @action closePath() {
-        this.closed = +(!this.closed);
     }
 
     constructor() {

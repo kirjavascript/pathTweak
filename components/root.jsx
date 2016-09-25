@@ -24,6 +24,7 @@ import { Flex, Tile, Colour, AbsPos, Icon } from './UI/index.jsx';
     add node between
     url shortener api thingy save icon?http://stackoverflow.com/questions/35544698/generate-tinyurl-with-client-side-javascript-need-cors-workaround
     <g> rotate/etc </g> 
+    keyboard controls
 */}
 
 @observer
@@ -40,6 +41,7 @@ class Root extends React.Component {
             {name:'quadratic', type: 'Q'},
             {name:'bezier', type: 'C'},
             {name:'arc', type: 'A'},
+            {name:'close', type: 'Z'},
         ];
 
     }
@@ -79,9 +81,6 @@ class Root extends React.Component {
                         name={command.name}
                         onClick={store.add.bind(store, command.type)}/>;
                 })}
-                <Icon 
-                    name={store.closed ? 'unclose' : 'close'}
-                    onClick={::store.closePath}/>
                 <Icon 
                     name="clear"
                     onClick={::store.clear}/>

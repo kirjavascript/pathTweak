@@ -21,6 +21,9 @@ function getPath() {
         else if (d.type == 'V') {
             output+=`${snapTo(d.y)} `;
         }
+        else if (d.type == 'Z') {
+            output+='z';
+        }
         else {
             output+=`${snapTo(d.x)},${snapTo(d.y)} `;
         }
@@ -28,10 +31,6 @@ function getPath() {
         return output.slice(0,-1);
 
     });
-
-    if (store.closed) {
-        output.push('z');
-    }
 
     return output.join('');
 }
@@ -62,15 +61,10 @@ function parsePath(urlPath) {
     commands
         .forEach((command) => {
 
-            if (command.type == 'Z') {
-                this.closed = 1;
-            }
-            else {
-                this.commands.push(new Command({ 
-                    parent: this,
-                    historic: command
-                }));
-            }
+            this.commands.push(new Command({ 
+                parent: this,
+                historic: command
+            }));
 
         });
 }

@@ -65,19 +65,17 @@ export default class {
 
         this.snapTo = () => {
 
-            let x, y;
+            let x = snapTo(this.x);
+            let y = snapTo(this.y);
 
             if (this.type == 'V') {
                 x = this.getVX();
             }
-            else {
-                x = snapTo(this.x);
-            }
-            if (this.type == 'H') {
+            else if (this.type == 'H') {
                 y = this.getHY();
             }
-            else {
-                y = snapTo(this.y);
+            else if (this.type == 'Z') {
+                [x, y] = this.getZ();
             }
 
             return {
@@ -106,6 +104,25 @@ export default class {
             }
         };
 
+        this.getZ = () => {
+            let index = this.getIndex();
+            let startIndex = 0;
+
+            for (let i=index-1;i>=0;i--) {
+                if (parent.commands[i].type=='M') {
+                    startIndex = i;
+                    break;
+                }
+            }
+
+            let x1 = parent.commands[startIndex].x;
+            let y1 = parent.commands[startIndex].y;
+            let x2 = parent.commands[index-1].x;
+            let y2 = parent.commands[index-1].y;
+
+            return [(x1+x2)/2,(y1+y2)/2];
+        };
+
         this.getIndex = () => {
             return parent.getIndexById(this.id);
         };
@@ -118,4 +135,3 @@ export default class {
     }
 
 }
-
