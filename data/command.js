@@ -115,12 +115,10 @@ export default class {
                 }
             }
 
-            let x1 = parent.commands[startIndex].x;
-            let y1 = parent.commands[startIndex].y;
-            let x2 = parent.commands[index-1].x;
-            let y2 = parent.commands[index-1].y;
+            let end = parent.commands[startIndex].snapTo();
+            let start = parent.commands[index-1].snapTo();
 
-            return [(x1+x2)/2,(y1+y2)/2];
+            return [(start.x+end.x)/2,(start.y+end.y)/2];
         };
 
         this.hasX1 = () => {

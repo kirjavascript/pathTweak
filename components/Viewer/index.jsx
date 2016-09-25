@@ -6,6 +6,22 @@ import Node from './node.jsx';
 @observer
 class Command extends React.Component {
 
+    constructor(props) {
+        super(props);
+
+        let store = this.props.store;
+
+        window.addEventListener('DOMMouseScroll', (e) => {
+            if (e.detail > 0) {
+                store.zoom += .5;
+
+            }
+            else if (store.zoom > .5) {
+                store.zoom -= .5;
+            }
+        });
+    }
+
     render() {
         let store = this.props.store;
 
@@ -14,7 +30,7 @@ class Command extends React.Component {
             className={styles.viewer}
             xmlns="http://www.w3.org/2000/svg">
 
-            <g transform={'translate(60,80)'}>
+            <g transform={`translate(60,80),scale(${store.zoom})`}>
                 <path
                     d={store.path}
                     fill="#a6b2c0"
@@ -32,7 +48,7 @@ class Command extends React.Component {
                 </g>    
             </g>
 
-            <Axis/>
+            <Axis zoom={store.zoom} />
         </svg>
         );
     }

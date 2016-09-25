@@ -53,11 +53,13 @@ class Axis extends React.Component {
             .attr('transform', 'translate(60,80)')
             .call(this.yAxis);
 
-        window.addEventListener('resize', () => {
+        this.refresh = () => {
             this.setAxis();
             this.xAxisGroup.call(this.xAxis);
             this.yAxisGroup.call(this.yAxis);
-        });
+        };
+
+        window.addEventListener('resize', this.refresh);
     }
 
     shouldComponentUpdate() {

@@ -7,6 +7,7 @@ class Store {
 
     @observable commands = [];
     @observable grid = 1;
+    @observable zoom = 1;
 
     getIndexById(id) {
         return this.commands.findIndex((d) => d.id == id);

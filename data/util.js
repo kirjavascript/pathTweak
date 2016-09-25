@@ -32,7 +32,10 @@ function getPath() {
 
     });
 
-    return output.join('');
+    output = output.join('');
+
+    return output;
+    
 }
 
 function snapTo(num) {
