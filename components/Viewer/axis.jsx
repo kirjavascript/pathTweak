@@ -4,8 +4,8 @@ import { axisBottom, axisLeft, axisTop, axisRight } from 'd3-axis';
 import { scaleLinear } from 'd3-scale';
 import * as d3 from 'd3-selection';
 
-function formatTicks(value) {
-    return value == 0 ? '' : `${value}px`;
+function formatTicks(value, index) {
+    return index == 0 ? '' : `${value}px`;
 }
 
 class Axis extends React.Component {
@@ -57,16 +57,12 @@ class Axis extends React.Component {
             this.setAxis();
             this.xAxisGroup.call(this.xAxis);
             this.yAxisGroup.call(this.yAxis);
-
         });
     }
 
     shouldComponentUpdate() {
         return false;
     }
-
-    // componentWillReceiveProps(nextProps) {
-    // }
 
     render () {
 

@@ -21,6 +21,10 @@ class Node extends React.Component {
         this.onDrag = (e, dragEvent) => {
             e.preventDefault();
 
+            if (command.type == 'Z') {
+                return;
+            }
+
             if (command.type != 'V') {
                 command.x += dragEvent.deltaX;
             }
@@ -28,7 +32,7 @@ class Node extends React.Component {
                 command.y += dragEvent.deltaY;
             }
 
-            if (command.type == 'C' || command.type == 'Q' || command.type == 'A') {
+            if (command.hasX1()) {
                 this.onDragC1(e, dragEvent);
             }
             if (command.type == 'C') {
@@ -86,7 +90,7 @@ class Node extends React.Component {
                         className={styles[type]}/>
                 </DraggableCore>
 
-                {(type == 'C' || type == 'Q' || type == 'A') &&
+                {(command.hasX1()) &&
                     <Adjust 
                         drag={this.onDragC1}
                         x={x}

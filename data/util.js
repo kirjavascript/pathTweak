@@ -5,7 +5,7 @@ import Command from './command';
 function getPath() {
     let output = store.commands.map((d) => {
         let output = d.type;
-        if (d.type == 'C' || d.type == 'Q' || d.type == 'A') {
+        if (d.hasX1()) {
             output += `${snapTo(d.x1)},${snapTo(d.y1)} `;
         }
         if (d.type == 'C') {

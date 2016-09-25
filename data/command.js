@@ -123,6 +123,10 @@ export default class {
             return [(x1+x2)/2,(y1+y2)/2];
         };
 
+        this.hasX1 = () => {
+            return ~'CQAS'.indexOf(this.type);
+        };
+
         this.getIndex = () => {
             return parent.getIndexById(this.id);
         };

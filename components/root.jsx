@@ -11,20 +11,17 @@ import { Flex, Tile, Colour, AbsPos, Icon } from './UI/index.jsx';
 
 {/*
     electron
-    serialize to localstorage
-    lowercase output
-    select multiple (d3-brush?)
+    minified output
     // freehand draw!
     add S/T Z in middle of path?
     force snap to grid on state change??
+    <g> rotate/etc </g> 
 
     README? ever need to makea  quick path - right click explain
     #M300,300H600Q650,300 650,350V400Q650,450 600,450H300z
     
     add node between
-    url shortener api thingy save icon?http://stackoverflow.com/questions/35544698/generate-tinyurl-with-client-side-javascript-need-cors-workaround
-    <g> rotate/etc </g> 
-    keyboard controls
+    keyboard controls / brush (blue) w/ react?
 */}
 
 @observer
@@ -39,7 +36,9 @@ class Root extends React.Component {
             {name:'horizontal', type: 'H'},
             {name:'vertical', type: 'V'},
             {name:'quadratic', type: 'Q'},
+            {name:'smoothquad', type: 'T'},
             {name:'bezier', type: 'C'},
+            {name:'smooth', type: 'S'},
             {name:'arc', type: 'A'},
             {name:'close', type: 'Z'},
         ];
