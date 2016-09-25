@@ -43,25 +43,15 @@ export default class {
             let width = window.innerWidth-60;
             let height = window.innerHeight-80;
 
-            if (type != 'V') {
-                this.x = (width / 2 + r * Math.cos(a))|0;
-            }
-            if (type != 'H') {
-                this.y = (height / 2 + r * Math.sin(a))|0;
-            }
-            if (type == 'C' || type == 'Q' || type == 'A') {
-                this.x1 = (width / 2 + r * Math.cos(a)*2)|0;
-                this.y1 = (height / 2 + r * Math.sin(a)/2)|0;
-            }
-            if (type == 'C') {
-                this.y2 = (width / 2 + r * Math.cos(a)/2)|0;
-                this.x2 = (height / 2 + r * Math.sin(a)*2)|0;
-            }
-            if (type == 'A') {
-                this.rotate = 0;
-                this.large = 0;
-                this.sweep = 0;
-            }
+            this.x = (width / 2 + r * Math.cos(a))|0;
+            this.y = (height / 2 + r * Math.sin(a))|0;
+            this.x1 = (width / 2 + r * Math.cos(a)/2)|0;
+            this.y1 = (height / 2 + r * Math.sin(a)/3)|0;
+            this.x2 = (width / 2 + r * Math.cos(a)*2)|0;
+            this.y2 = (height / 2 + r * Math.sin(a)/2)|0;
+            this.rotate = 0;
+            this.large = 0;
+            this.sweep = 0;
         }
 
 

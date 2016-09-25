@@ -12,7 +12,9 @@ let colours = {
 };
 
 const Colour = (props) => {
-    return <span style={{color:colours[props.is]}}>{props.children}</span>;
+    return <span style={{color:colours[props.is]}}>
+        {props.children}
+    </span>;
 };
 
 const Flex = (props) => {

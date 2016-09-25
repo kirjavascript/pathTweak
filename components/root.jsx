@@ -21,9 +21,9 @@ import { Flex, Tile, Colour, AbsPos, Icon } from './UI/index.jsx';
     README? ever need to makea  quick path - right click explain
     #M300,300H600Q650,300 650,350V400Q650,450 600,450H300z
     
+    add node between
     url shortener api thingy save icon?http://stackoverflow.com/questions/35544698/generate-tinyurl-with-client-side-javascript-need-cors-workaround
     <g> rotate/etc </g> 
-
 */}
 
 @observer
