@@ -22,6 +22,11 @@ import { Flex, Tile, Colour, AbsPos, Icon } from './UI/index.jsx';
     
     add node between
     keyboard controls / brush (blue) w/ react?
+
+    convert axis to use react
+    .moveTo() in command
+    ctrl-A
+    write your own blue brush
 */}
 
 @observer
