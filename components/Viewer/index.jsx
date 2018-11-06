@@ -30,6 +30,7 @@ class Command extends React.Component {
             className={styles.viewer}
             xmlns="http://www.w3.org/2000/svg">
 
+            <Axis zoom={store.zoom} />
             <g transform={`translate(60,80),scale(${store.zoom})`}>
                 <path
                     d={store.path}
@@ -47,8 +48,6 @@ class Command extends React.Component {
                     })}
                 </g>
             </g>
-
-            <Axis zoom={store.zoom} />
         </svg>
         );
     }
