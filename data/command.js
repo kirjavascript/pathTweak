@@ -20,8 +20,6 @@ export default class {
     @observable large;
     @observable sweep;
 
-    @action select;
-
     constructor({ type, parent, historic }) {
 
         this.id = Math.random().toString(36).slice(2);

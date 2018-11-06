@@ -6,7 +6,7 @@ import History from './history';
 class Store {
 
     @observable commands = [];
-    @observable grid = 1;
+    @observable grid = 10;
     @observable zoom = 1;
 
     getIndexById(id) {
@@ -58,7 +58,7 @@ class Store {
             // if path is invalid or doesn't exist
             this.commands.push(new Command({type: 'M', parent: this}));
         }
-        
+
     }
 
 }

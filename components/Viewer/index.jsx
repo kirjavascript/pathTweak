@@ -6,27 +6,27 @@ import Node from './node.jsx';
 @observer
 class Command extends React.Component {
 
-    constructor(props) {
-        super(props);
+    // constructor(props) {
+    //     super(props);
 
-        let store = this.props.store;
+    //     let store = this.props.store;
 
-        window.addEventListener('DOMMouseScroll', (e) => {
-            if (e.detail > 0) {
-                store.zoom += .5;
+    //     window.addEventListener('DOMMouseScroll', (e) => {
+    //         if (e.detail > 0) {
+    //             store.zoom += .5;
 
-            }
-            else if (store.zoom > .5) {
-                store.zoom -= .5;
-            }
-        });
-    }
+    //         }
+    //         else if (store.zoom > .5) {
+    //             store.zoom -= .5;
+    //         }
+    //     });
+    // }
 
     render() {
         let store = this.props.store;
 
         return (
-        <svg 
+        <svg
             className={styles.viewer}
             xmlns="http://www.w3.org/2000/svg">
 
@@ -41,11 +41,11 @@ class Command extends React.Component {
                 <g>
                     {store.commands.map((command) => {
 
-                        return <Node 
+                        return <Node
                             key={command.id}
                             command={command}/>;
                     })}
-                </g>    
+                </g>
             </g>
 
             <Axis zoom={store.zoom} />

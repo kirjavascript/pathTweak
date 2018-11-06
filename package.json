@@ -36,6 +36,7 @@
     "svg-url-loader": "^1.1.0",
     "svgo": "^0.7.0",
     "svgo-loader": "^1.1.0",
-    "webpack": "^1.13.2"
+    "webpack": "^1.13.2",
+    "webpack-dev-server": "^1"
   }
 }
